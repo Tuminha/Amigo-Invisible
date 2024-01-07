@@ -33,6 +33,17 @@ participant_numbers = {
 
 
 def assign_secret_friend(number):
+    """
+    This function assigns a secret friend to a participant.
+    It takes a number as input, checks if the number is in the list of participants,
+    and if it is, it assigns a secret friend to the participant.
+    The function also checks if the assignements.json file exists and if it does not,
+    it creates it. The file contains key values with the name, secret friend assigned
+    and also a boolean to register that this person already checked in and already knows his/her secret friend.
+    The function returns the secret friend assigned and writes it into the assignements.json file.
+    It handles errors and also the case when the number entered is not in the list of participants,
+    avoiding overwriting the file. The function also returns a message to the user with the name of the secret friend assigned.
+    """
     # Convert the number to a string
     str_number = str(number)
 
@@ -62,16 +73,22 @@ def assign_secret_friend(number):
         return list(participant_numbers.keys())[list(participant_numbers.values()).index(number)]
     
     def get_secret_friend(name):
-        return assignements[participant_numbers[name]]["secret_friend"]
+        try:
+            return assignements[participant_numbers[name]]["secret_friend"]
+        except KeyError:
+            return "Participant's name not found in assignments"
 
-    # First we get the secret friend
-    secret_friend = random.choice(participants)
-    # Then we check if the secret friend is the person itself or the secret friend of the person itself
-    while secret_friend == get_name(number) or (str_number in assignements and secret_friend == get_secret_friend(get_name(number))):
-        # If it is, we get a new secret friend
-        secret_friend = random.choice(participants)
+    # Create a list of potential secret friends, excluding the participant and their current secret friend
+    potential_secret_friends = [friend for friend in participants if friend != get_name(number) and friend != get_secret_friend(get_name(number))]
 
-    # Once we have a secret friend, we save it in the file
+    # If there are no potential secret friends, return an error message
+    if not potential_secret_friends:
+        return "No potential secret friends available"
+
+    # Select a secret friend from the list of potential secret friends
+    secret_friend = random.choice(potential_secret_friends)
+
+    # Save the secret friend in the file
     assignements[str_number] = {"secret_friend": secret_friend, "checked": False}
     try:
         with open("assignements.json", "w", encoding='utf-8') as f:
@@ -79,10 +96,20 @@ def assign_secret_friend(number):
     except Exception as e:
         return "Error writing to assignements file: " + str(e)
 
-    # And return the secret friend  
+    # Return the secret friend  
     return secret_friend
     
 def check_in(number):
+    """
+    This function checks in a participant.
+    It takes a number as input, checks if the number is in the list of participants,
+    and if it is, it checks in the participant.
+    The function also checks if the assignements.json file exists and if it does not,
+    it returns an error message. If the file exists, it reads it and checks if the number is in the assignements.
+    If the participant has already checked in, it returns a message.
+    If the participant has not checked in, it updates the checked status to true and writes the updated data back to the file.
+    The function returns a message to the user with the name of the secret friend assigned.
+    """
     # Convert the number to a string
     number = str(number)
 
