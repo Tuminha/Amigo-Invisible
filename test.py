@@ -1,5 +1,5 @@
 import unittest
-from amigo_invisible import assign_secret_friend, participant_numbers
+from amigo_invisible.amigo_invisible import assign_secret_friend, participant_numbers
 import os
 import json
 from unittest.mock import patch, MagicMock

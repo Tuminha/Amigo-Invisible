@@ -1,5 +1,5 @@
 import streamlit as st
-from amigo_invisible import assign_secret_friend, check_in, participant_numbers
+from amigo_invisible.amigo_invisible import assign_secret_friend, check_in, participant_numbers
 import os
 import json
 from openai import OpenAI
