@@ -7,75 +7,61 @@ from dotenv import load_dotenv
 import os
 import time
 
-# This is the title of the app.
+
+# Assign secret friends at the start (if not already done)
+if not os.path.exists("assignments.json"):
+    assign_secret_friend()
+
+# Streamlit app code
 st.title("🎄🎁 Amigo Invisible 🎁🎄")
-
-# This is a text input that takes a two-digit number.
 number = st.text_input("🔢 Enter your number:")
-
-# This is the description of the app.
 st.markdown("## Step 1: Check Your Secret Friend")
-st.write("🎉 Welcome to the Amigo Invisible App! Each participant has a unique number. Enter your number below to find out who your secret santa is. If you don't know your number, ask the game organizer (Tuminha). 🎉")
+st.write("🎉 Welcome to the Amigo Invisible App! Enter your number below to find out who your secret santa is.")
 
-
-# Show the participants names and if they are showed as checked in true in the assignements.json file, show a check mark next to their name.
-# The participants are spread across 3 columns instead of just one.
+# Show the participants names and their check-in status
 st.write("📝 Participants:")
 col1, col2, col3 = st.columns(3)
 columns = [col1, col2, col3]
+
+with open("assignments.json", "r", encoding='utf-8') as f:
+    assignments = json.load(f)
+
 for i, (name, participant_number) in enumerate(participant_numbers.items()):
-    if os.path.exists("assignements.json"):
-        with open("assignements.json", "r", encoding='utf-8') as f:
-            assignements = json.load(f)
-        if str(participant_number) in assignements and assignements[str(participant_number)]["checked"]:
-            columns[i%3].write(f"✅ {name}")
-        else:
-            columns[i%3].write(f"❌ {name}")
-    else:
-        columns[i%3].write(f"❌ {name}")
+    checked_in = assignments[str(participant_number)]["checked"]
+    columns[i % 3].write(f"{'✅' if checked_in else '❌'} {name}")
 
-
-
-
-
-
-
-# When the "Check Secret Friend" button is clicked
+# Check Secret Friend
 if st.button("Check Secret Friend"):
-    if number.isdigit():  # Check if the input is a number
-        with st.spinner('Checking secret friend...'):
-            try:
-                # Convert the input number to an integer
-                number = int(number)
-                # Check if the number is in the participant numbers
-                if number in participant_numbers.values():
-                    # Assign a secret friend using the assign_secret_friend function from amigo_invisible.py
-                    secret_friend = assign_secret_friend(number)
-                    st.success(f"Your secret friend is: {secret_friend}")
-                else:
-                    st.error("Invalid number. Please enter a valid participant number.")
-            except ValueError:
-                st.error("Invalid input. Please enter a number.")
+    try:
+        number = int(number)
+        if number in participant_numbers.values():
+            secret_friend_name = assignments[str(number)]["secret_friend"]
+            st.success(f"Your secret friend is: {secret_friend_name}")
+        else:
+            st.error("Invalid number. Please enter a valid participant number.")
+    except ValueError:
+        st.error("Invalid input. Please enter a number.")
 
+# Check-in
 st.markdown("## Step 2: Check-in")
-st.write("🎉 Once you know who your secret friend is, click the button below to check-in. 🎉")
-st.write("Is important you check in so  everyone knows you have seen your secret friend.")
-# When the "Check-in" button is clicked
 if st.button("Check-in"):
-    if number.isdigit():  # Check if the input is a number
-        with st.spinner('Checking in...'):
-            try:
-                # Convert the input number to an integer
-                number = int(number)
-                # Check if the number is in the participant numbers
-                if number in participant_numbers.values():
-                    # Check in using the check_in function from amigo_invisible.py
-                    check_in_message = check_in(number)
-                    st.success(check_in_message)
-                else:
-                    st.error("Invalid number. Please enter a valid participant number.")
-            except ValueError:
-                st.error("Invalid input. Please enter a number.")
+    try:
+        number = int(number)
+        if number in participant_numbers.values():
+            check_in_message = check_in(number)
+            st.success(check_in_message)
+            # Add a check mark of check in to the user that just did the check in, for that is just has to read the json file and update the status of the user that just did the check in
+            with open("assignments.json", "r", encoding='utf-8') as f:
+                assignments = json.load(f)
+            assignments[str(number)]["checked"] = True
+            with open("assignments.json", "w", encoding='utf-8') as f:
+                json.dump(assignments, f, ensure_ascii=False, indent=4)
+
+        else:
+            st.error("Invalid number. Please enter a valid participant number.")
+    except ValueError:
+        st.error("Invalid input. Please enter a number.")
+
 
 # Lets have a an option where the user has a dropdown that allows to choose the secret friend and also another dropdown with the forecasted ammount to spend, splited in <20 CHF, between 20-50 and more than 50. With one exception, if the assigned secret friend is 👸 Mami, the dropdown only allows to pick more than 50 CHF. and show a message saying "have some dignity. Im a queen!"
 st.markdown("## Step 3: Buy a gift")
