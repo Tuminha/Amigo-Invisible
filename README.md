@@ -1,6 +1,6 @@
 ![Secret Santa App](images/secret_santa_app.png)
 
-
+Link to the live project: [Amigo Invisible App](https://tuminha-amigo-invisible-app-sx1moy.streamlit.app)
 
 
 
