@@ -1,7 +1,8 @@
 import unittest
+from unittest.mock import patch, mock_open
 from amigo_invisible.amigo_invisible import assign_secret_friend, check_in, participants, participant_numbers
 import json
-from unittest.mock import patch, MagicMock, mock_open
+
 
 class TestAmigoInvisible(unittest.TestCase):
     def test_assign_secret_friend_logic(self):
