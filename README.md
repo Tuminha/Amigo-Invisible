@@ -21,6 +21,7 @@ Link to the live project: [Amigo Invisible App](https://tuminha-amigo-invisible-
    - 4.2. [Streamlit](#streamlit)
    - 4.3. [OpenAI's GPT-4 API](#openais-gpt-4-api)
    - 4.4. [Additional Libraries and Tools](#additional-libraries-and-tools)
+   - 4.5. [Customization of AI Agent](#customization-of-ai-agent)
    - 4.5. [Development Tools](#development-tools)
 5. [Existing Features](#existing-features)
    - 5.1. [Welcome Screen](#welcome-screen)
@@ -123,6 +124,96 @@ OpenAI Python Client: A Python library provided by OpenAI for easy integration o
 Git: Used for version control, allowing for effective tracking and management of code changes.
 GitHub: Hosts the code repository and facilitates version control and collaboration.
 Visual Studio Code: The chosen Integrated Development Environment (IDE) for writing and editing the code, known for its robust features and support for Python development.
+
+## Customization of AI Agent
+
+One of the unique aspects of the Amigo Invisible App is its AI-powered gift recommendation feature, which leverages OpenAI's GPT-4 API. The prompt given to the AI can be fully customized to align with the specific preferences and characteristics of the participants. This customization ensures that the gift suggestions are not only creative but also personal and thoughtful.
+
+To tailor the AI prompts for your own Secret Santa event, you can modify the `app.py` file. Here's a shell command example to open the file in your editor and make the desired changes:
+
+```shell
+nano app.py
+```
+Or, if you prefer using Visual Studio Code:
+
+```shell
+code app.py
+```
+Within the `app.py` file, navigate to the section where the AI prompt is set up and adjust the text to better reflect the interests and personalities of your participants. This allows you to create a more engaging and personalized experience for each user of the app.
+
+In the `app.py` file, look for the following code block:
+
+```python
+user_message = {
+    "role": "user",
+    "content": (
+        f"Based on the following information, what should I buy for "
+        f"{secret_friend} with the assigned budget of {amount}?\n"
+        "👸 Mami: Mami adores luxury! For her, think lavish and expensive. "
+        "Recommend gifts worth at least 50 Swiss francs. Ideas include "
+        "elegant purses, diamonds, or anything that screams opulence. "
+        "Inject humor by nudging towards extravagant choices.\n"
+        "🤦‍♀️ Maite: At 17, Maite, the mom to Mami and Marta, enjoys a"
+        " variety of things. She's into yoga, loves her grandkids, "
+        "and adores walking her dog. "
+        "Gift suggestions can range from yoga gear, fun items for her "
+        "grandkids, "
+        "to dog accessories. Keep it varied and surprising!\n"
+        "😡 Marta: Marta, the 37-year-old McKinsey genius, needs gifts "
+        "that stimulate her intellect. "
+        "Suggest puzzles, challenging books, or anything that sparks"
+        " intellectual curiosity. Ensure recommendations are as smart"
+        " and savvy as she is.\n"
+        "👧🏻 Oleia: At 8, Oleia loves dogs, parties, and painting."
+        " Recommend fun, age-appropriate gifts like art supplies,"
+        " party games, or anything dog-themed. Ensure suggestions are"
+        " full of energy and creativity.\n"
+        "👦🏻 Nuno: Nuno, 15, is a golf fanatic and interested in money."
+        " Suggest golf-related items, from equipment to accessories."
+        " Maybe even a humorous suggestion about a piggy bank!\n"
+        "🚿 Buis: Our 13-year-old video game enthusiast, Buis, could"
+        " use some outdoor fun. Suggest gifts that encourage active"
+        " hobbies like sports equipment or outdoor adventure games."
+        " Encourage more sunshine and less screen time.\n"
+        "🎅 Nicolas: 12-year-old Mr. Christmas loves painting,"
+        " crafting, and anything creative, especially with airplanes"
+        " or electricity themes. Suggest DIY kits, craft supplies,"
+        " or model airplanes. Emphasize the festive and creative"
+        " aspects.\n"
+        "👶 Buarte: At just 4 years old, Buarte adores robots,"
+        " dinosaurs, dogs, and Christmas. Suggest educational robot toys,"
+        " dinosaur figures, or dog-themed books. Keep ideas playful"
+        " and educational.\n"
+        "👧 Matilda: Another 4-year-old, Matilda recently lost a tooth."
+        " Suggest child-friendly gifts like plush toys or storybooks."
+        " Add a light-hearted suggestion about dental implants for her"
+        " missing tooth to inject humor.\n"
+        "🚴 Lance: Lance loves sports and is knowledgeable about"
+        " almost everything. Recommend sports gear or books on diverse"
+        " topics. Encourage discussions and learning through your gift"
+        " suggestions.\n"
+        "🍆 Papi: At 45, Papi values family over material gifts."
+        " Suggest something simple and inexpensive, less than 20 Swiss"
+        " francs, like a family photo frame or a handmade gift."
+        " Emphasize the joy of family togetherness."
+    )
+}
+```
+This is the prompt that is sent to the AI agent. You can customize this prompt to better suit the participants of your Secret Santa event. For example, you can change the descriptions of the participants, add new participants, or modify the gift suggestions.
+
+After modifying the prompt, you can also adjust the parameters of the OpenAI API call, which is done in the following code block:
+
+```python
+response = client.chat.completions.create(
+    model="gpt-4-1106-preview",
+    messages=[system_message, user_message],
+    max_tokens=3000,
+    temperature=0.8
+)
+```
+You can adjust the `max_tokens` parameter to control the length of the AI's response, or the `temperature` parameter to control the randomness of the AI's response.
+
+Remember to save your changes and restart the app for the changes to take effect.
 
 ## Existing Features
 ### Welcome Screen
@@ -301,6 +392,11 @@ To run the tests, execute the following command from the root directory:
 ```shell
 python -m unittest discover tests
 ```
+or:
+```shell
+pytest test_amigo_invisible.py
+```
+
 All tests should pass without errors, confirming the integrity of the application.
 
 ### Test File Reference
