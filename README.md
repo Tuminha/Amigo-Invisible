@@ -8,47 +8,49 @@ Link to the live project: [Amigo Invisible App](https://tuminha-amigo-invisible-
 
 1. [Amigo Invisible (Secret Santa) App Overview](#amigo-invisible-secret-santa-app-overview)
 2. [How the App Works](#how-the-app-works)
-   - 2.1. [Random Assignment](#random-assignment)
-   - 2.2. [Participant Anonymity](#participant-anonymity)
-   - 2.3. [Streamlit Frontend](#streamlit-frontend)
-   - 2.4. [Gift Giving Made Easy](#gift-giving-made-easy)
+   - [Random Assignment](#random-assignment)
+   - [Participant Anonymity](#participant-anonymity)
+   - [Streamlit Frontend](#streamlit-frontend)
+   - [Gift Giving Made Easy](#gift-giving-made-easy)
 3. [Features of the Amigo Invisible (Secret Santa) App](#features-of-the-amigo-invisible-secret-santa-app)
-   - 3.1. [Secret Number Assignment](#secret-number-assignment)
-   - 3.2. [Check-In Functionality](#check-in-functionality)
-   - 3.3. [AI-Powered Gift Recommendations](#ai-powered-gift-recommendations)
-4. [Technologies Used](#technologies-used)
-   - 4.1. [Python](#python)
-   - 4.2. [Streamlit](#streamlit)
-   - 4.3. [OpenAI's GPT-4 API](#openais-gpt-4-api)
-   - 4.4. [Additional Libraries and Tools](#additional-libraries-and-tools)
-   - 4.5. [Customization of AI Agent](#customization-of-ai-agent)
-   - 4.5. [Development Tools](#development-tools)
-5. [Existing Features](#existing-features)
-   - 5.1. [Welcome Screen](#welcome-screen)
-   - 5.2. [Main Menu](#main-menu)
-   - 5.3. [Participant Assignment and Check-In](#participant-assignment-and-check-in)
-   - 5.4. [AI-Powered Gift Recommendations](#ai-powered-gift-recommendations)
-   - 5.5. [Responsive Web Interface](#responsive-web-interface)
-   - 5.6. [Administrative Features](#administrative-features)
-6. [Features Left to Implement](#features-left-to-implement)
-7. [Testing](#testing)
-   - 7.1. [General Testing](#general-testing)
-   - 7.2. [Development and Deployment Environment](#development-and-deployment-environment)
-   - 7.3. [PEP8 Compliance](#pep8-compliance)
-   - 7.4. [Automated Testing](#automated-testing)
-   - 7.5. [User Stories Testing](#user-stories-testing)
-   - 7.6. [Lighthouse Performance Report](#lighthouse-performance-report)
-8. [Bugs and Fixes](#bugs-and-fixes)
-   - 8.1. [Encountered Issues](#encountered-issues)
-   - 8.2. [Unresolved Issues](#unresolved-issues)
-9. [Testing Approach and Results](#testing-approach-and-results)
-   - 9.1. [Manual Testing Highlights](#manual-testing-highlights)
-   - 9.2. [Automated Testing Highlights](#automated-testing-highlights)
-   - 9.3. [Test Execution](#test-execution)
-   - 9.4. [Test File Reference](#test-file-reference)
-10. [Deployment](#deployment)
-11. [Fork and Clone](#fork-and-clone)
-12. [Acknowledgements and Credits](#acknowledgements-and-credits)
+   - [Secret Number Assignment](#secret-number-assignment)
+   - [Check-In Functionality](#check-in-functionality)
+   - [AI-Powered Gift Recommendations](#ai-powered-gift-recommendations)
+4. [Technical Design](#technical-design)
+   - [Flowchart](#flowchart)
+5. [Technologies Used](#technologies-used)
+   - [Languages and Libraries](#languages-and-libraries)
+   - [Web Framework](#web-framework)
+   - [AI Integration](#ai-integration)
+   - [Environment and API Management](#environment-and-api-management)
+   - [Development and Version Control](#development-and-version-control)
+6. [Customization of AI Agent](#customization-of-ai-agent)
+7. [Existing Features](#existing-features)
+   - [Welcome Screen](#welcome-screen)
+   - [Main Menu](#main-menu)
+   - [Participant Assignment and Check-In](#participant-assignment-and-check-in)
+   - [AI-Powered Gift Recommendations](#ai-powered-gift-recommendations)
+   - [Responsive Web Interface](#responsive-web-interface)
+   - [Administrative Features](#administrative-features)
+8. [Features Left to Implement](#features-left-to-implement)
+9. [Testing](#testing)
+   - [General Testing](#general-testing)
+   - [Development and Deployment Environment](#development-and-deployment-environment)
+   - [PEP8 Compliance](#pep8-compliance)
+   - [Automated Testing](#automated-testing)
+   - [User Stories Testing](#user-stories-testing)
+   - [Lighthouse Performance Report](#lighthouse-performance-report)
+10. [Bugs and Fixes](#bugs-and-fixes)
+   - [Encountered Issues](#encountered-issues)
+   - [Unresolved Issues](#unresolved-issues)
+11. [Testing Approach and Results](#testing-approach-and-results)
+   - [Manual Testing Highlights](#manual-testing-highlights)
+   - [Automated Testing Highlights](#automated-testing-highlights)
+   - [Test Execution](#test-execution)
+   - [Test File Reference](#test-file-reference)
+12. [Deployment](#deployment)
+13. [Fork and Clone](#fork-and-clone)
+14. [Acknowledgements and Credits](#acknowledgements-and-credits)
 
 
 
@@ -95,35 +97,44 @@ Participants simply input their budget, and the AI suggests suitable gifts for t
 
 These carefully crafted features make the Amigo Invisible app not just a tool for organizing Secret Santa events but a comprehensive platform that enhances the entire experience, from assignment to gift selection, fostering a joyful and memorable holiday tradition.
 
+## Technical Design
+
+### Flowchart
+
+Based on the features described above, the following flowchart illustrates the technical design of the Amigo Invisible app:
+
+![Amigo Invisible Flowchart](images/flowchart.png)
+
 ## Technologies Used
 
-The Amigo Invisible app is built using a variety of technologies, libraries, and tools that together create a seamless and user-friendly experience. Below is an overview of the key technologies utilized:
+The Amigo Invisible app leverages a combination of languages, libraries, and tools to deliver a fully functional secret Santa application. Below are the main technologies and third-party libraries employed, along with their purposes and links to their official documentation.
 
-### Python
+### Languages and Libraries
 
-Python: The core language used for the backend development of the app, known for its simplicity and readability.
-JSON: Utilized for data storage and manipulation, particularly for managing participant assignments.
-OS Module: Integrated for interacting with the operating system, such as checking for the existence of files.
-Random Module: Employed to ensure the randomness in the assignment of Secret Santas, crucial for the fairness of the game.
+- **[Python](https://www.python.org/)**: The primary programming language used for developing both the logic and the web interface of the application.
+- **[JSON (JavaScript Object Notation)](https://docs.python.org/3/library/json.html)**: Utilized for storing and manipulating data, serving as the format for saving participant assignments.
+- **[os](https://docs.python.org/3/library/os.html)**: A Python standard library providing a way to interact with the operating system, used for file operations like checking if the `assignments.json` file exists.
+- **[random](https://docs.python.org/3/library/random.html)**: A Python standard library used to generate random elements, ensuring that secret Santa assignments are fair and unpredictable.
 
-### Streamlit
+### Web Framework
 
-Streamlit: An innovative framework for building interactive and intuitive web applications entirely in Python. Used for creating the frontend of the app, offering participants a user-friendly interface to interact with.
+- **[Streamlit](https://streamlit.io/)**: An open-source app framework for Machine Learning and Data Science teams. It is used to create the web interface that participants interact with, due to its rapid development capabilities and ease of use.
 
-### OpenAI's GPT-4 API
+### AI Integration
 
-OpenAI's GPT-4 API: Leveraged for integrating advanced AI capabilities into the app. The API is used to provide AI-powered gift recommendations, enhancing the user experience by suggesting creative and thoughtful gift ideas.
+- **[OpenAI's GPT-4 API](https://beta.openai.com/)**: The cutting-edge language model that powers the AI component of the app, providing intelligent and personalized gift recommendations.
 
-### Additional Libraries and Tools
+### Environment and API Management
 
-Dotenv: For managing environment variables, ensuring sensitive information such as API keys are securely handled.
-OpenAI Python Client: A Python library provided by OpenAI for easy integration of their language models into applications.
+- **[python-dotenv](https://pypi.org/project/python-dotenv/)**: A Python library for reading key-value pairs from a `.env` file and setting them as environment variables, used to manage sensitive data such as the OpenAI API key.
+- **[OpenAI Python Client](https://github.com/openai/openai-python)**: The official Python library for the OpenAI API, facilitating the integration of AI functionalities into the app.
 
-### Development Tools
+### Development and Version Control
 
-Git: Used for version control, allowing for effective tracking and management of code changes.
-GitHub: Hosts the code repository and facilitates version control and collaboration.
-Visual Studio Code: The chosen Integrated Development Environment (IDE) for writing and editing the code, known for its robust features and support for Python development.
+- **[Git](https://git-scm.com/)**: The distributed version-control system for tracking changes in the source code during development.
+- **[GitHub](https://github.com/)**: Provides hosting for software development and version control using Git, serving as the central repository for the app's codebase.
+- **[Visual Studio Code (VS Code)](https://code.visualstudio.com/)**: The preferred Integrated Development Environment (IDE) for writing, debugging, and editing the application's code, chosen for its extensive support for Python and integration with Git.
+
 
 ## Customization of AI Agent
 
@@ -306,47 +317,6 @@ Testing was also aligned with user stories to ensure that the app met the needs 
 
 ![Game Reset Feature](images/game_reset.png)
 
-### Lighthouse Performance Report
-The Amigo Invisible app was evaluated using Google Lighthouse, an open-source, automated tool for improving the quality of web pages. The Lighthouse report provides an overview of the app's performance, accessibility, best practices, and search engine optimization (SEO).
-
-#### Lighthouse Scores
-* Performance: 59
-* Accessibility: 75
-* Best Practices: 100
-* SEO: 90
-
-![Lighthouse Performance Report](images/Lighthouse_test.png)
-
-#### Diagnostics and Opportunities for Improvement
-##### Enable Text Compression
-* Issue: Potential savings of 25 KiB due to text-based resources not being compressed.
-* Impact: Compressing resources with gzip, deflate, or Brotli can significantly reduce network bytes.
-* Suggestion: Implement compression on the server to minimize the total size of text-based resources.
-
-##### Initial Server Response Time
-* Issue: The root document's server response time was 7,970 ms, which is quite high.
-* Impact: A slow initial response can delay all subsequent resource loads, affecting the user experience.
-* Suggestion: Investigate backend performance bottlenecks, optimize server configurations, or consider a more robust hosting solution to reduce Time to First Byte (TTFB).
-
-##### Largest Contentful Paint (LCP)
-* Issue: The LCP occurred at 5,830 ms, indicating a delay before the largest content element becomes visible.
-* Element: A paragraph containing text about selecting an amount to spend and choosing a secret friend.
-* Suggestion: Optimize critical rendering paths, reduce render-blocking resources, and consider lazy loading for non-critical assets.
-
-##### Cache Policy
-* Issue: Four resources lack an efficient cache policy.
-* Impact: Without caching, these resources must be downloaded every time, increasing load times on repeat visits.
-* Suggestion: Implement a cache policy for static assets with long TTL (time-to-live) values to speed up repeat visits.
-
-#### Insights and Next Steps
-The app demonstrates strong adherence to best practices and SEO, as indicated by the perfect scores in these categories. However, performance and accessibility offer room for improvement. Consider the following actions to enhance the app's Lighthouse scores:
-
-* Employ a Content Delivery Network (CDN) to serve compressed and cached content efficiently.
-* Review and optimize image sizes, apply image compression, and use modern formats like WebP.
-* Minimize the number and size of critical resources to improve load times.
-* Ensure that all text elements are easily readable and accessible to all users, potentially increasing the accessibility score.
-
-By addressing these areas, the app can achieve better performance, faster load times, and an improved overall user experience, further ensuring that it meets the high standards expected by users and search engines alike.
 
 ## Bugs and Fixes
 
@@ -406,82 +376,43 @@ The test_amigo_invisible.py file includes comprehensive tests for all functional
 
 ## Deployment
 
-To deploy your `app.py` on Streamlit, follow these general steps which align with Streamlit's own deployment processes:
+Deploying the Amigo Invisible app with Streamlit is a straightforward process that makes your Python scripts accessible as web applications. Below are the detailed steps to deploy your `app.py` using Streamlit Sharing:
 
-**Initial Setup:**
+### Initial Setup
 
-1. Make sure your app is in a public GitHub repository.
-2. Ensure the repository has a `requirements.txt` file that lists all the necessary Python packages.
+* Confirm that your app's code resides in a public GitHub repository to allow Streamlit Sharing to access it.
+* Ensure your repository includes a `requirements.txt` file that specifies all necessary Python packages. Streamlit Sharing uses this file to build the app environment.
 
-**Streamlit Sharing:**
+### Streamlit Sharing Account
 
-1. Sign up or log in to Streamlit Sharing.
-2. Click on "New app" in the upper-right corner of your workspace on the Streamlit Sharing dashboard.
+* If you haven't already, sign up for a Streamlit Sharing account [here](https://share.streamlit.io).
+* Log in to your Streamlit Sharing account to access your personal workspace dashboard.
 
-**App Configuration:**
+### Deploying the App
 
-1. Fill in your GitHub repository details, including the repository name, branch, and the path to your `app.py` file.
-2. Optionally, you can modify the app URL to a custom subdomain if preferred.
+* Click on the "New app" button located in the upper-right area of your Streamlit dashboard.
+* In the "GitHub URL" field, enter the URL of your GitHub repository containing the Streamlit app.
+* Select the branch where your `app.py` is located (typically the main or master branch).
+* In the "Path to file" field, enter the path to your `app.py` file within the repository (e.g., `/amigo_invisible/app.py`).
+* (Optional) Customize your app's URL by specifying a preferred subdomain under "Advanced settings".
+* Click the "Deploy" button to initiate the deployment process. Streamlit will start setting up your app's environment and deploy it.
 
-**Deployment:**
+### Post-Deployment
 
-1. Once you've configured your app, click "Deploy".
-2. Streamlit will automatically set up the environment based on your `requirements.txt` file and deploy your app.
-3. You'll receive a URL to access your deployed app.
+* Streamlit Sharing will provide a direct URL to your newly deployed app. You can share this URL with others or embed it in your documentation.
+* The Streamlit Sharing dashboard allows you to monitor your app’s performance, view logs, and manage app settings.
 
-**Monitoring and Logs:**
+### Updating Your App
 
-1. After deployment, you can monitor your app's performance and view logs directly from the Streamlit Sharing dashboard.
+* To update your deployed app, make changes to your `app.py` or other relevant files locally.
+* Commit and push the updates to your GitHub repository.
+* Streamlit Sharing automatically detects changes pushed to the linked branch and redeploys your app with the new updates.
 
-**Updating Your App:**
+### Troubleshooting
 
-1. If you make updates to your app, simply commit and push the changes to your GitHub repository.
-2. Streamlit Sharing will automatically detect changes to the main branch and redeploy your app.
-
-Remember, Streamlit Sharing is a platform provided by Streamlit which is designed to host and share Streamlit apps easily. It takes care of hosting the app and provides a simple way for users to deploy their Python scripts as web applications.
-
-If you encounter any issues during deployment, check the Streamlit forums and documentation for troubleshooting tips and community support.
-
-## Fork and Clone
-
-If you're interested in contributing to the Amigo Invisible app or would like to customize it for your own use, you can fork and clone the repository using the following steps:
-
-### Fork the Repository
-
-1. Go to the [Amigo Invisible repository on GitHub](https://github.com/Tuminha/Amigo-Invisible).
-2. In the top-right corner of the page, click the "Fork" button.
-3. On the "Create a new fork" page, you have the option to rename the repository for your account.
-4. Click on the "Create fork" button to create a copy of the repository in your GitHub account.
-
-### Clone the Repository
-
-To clone the repository and work on it locally on your machine:
-
-1. After forking the repository, go to your GitHub profile and click on "Repositories".
-2. Find and click on the forked "Amigo Invisible" repository.
-3. Inside the repository, click on the "Code" button.
-4. Ensure you're under the "HTTPS" tab and copy the provided link.
-5. Open your IDE or terminal and navigate to the directory where you want to clone the repository.
-6. Use the following git command to clone the repository:
-
-```shell
-git clone https://github.com/YOUR-USERNAME/Amigo-Invisible
-```
-Replace YOUR-USERNAME with your actual GitHub username.
-
-### Customizing Participants
-
-Once you have cloned the repository, you can customize the participants by modifying the `amigo_invisible.py` file. Here's a shell command example to open the file in your editor:
-
-```shell
-nano amigo_invisible.py
-```
-Or, if you're using Visual Studio Code:
-
-```shell
-code amigo_invisible.py
-```
-In the `amigo_invisible.py` file, look for the `participants` list and `participant_numbers` dictionary to update the participant names and numbers to your preference.
+* If your app doesn't deploy correctly, review the logs provided by Streamlit Sharing for error messages.
+* Consult the [Streamlit documentation](https://docs.streamlit.io/) and [community forums](https://discuss.streamlit.io/) for solutions and advice.
+* Remember to test your app locally before deploying to ensure it functions as expected. Streamlit Sharing's automatic environment setup and deployment features make it an ideal platform for sharing your Streamlit apps with a wider audience.
 
 ## Acknowledgements and Credits
 
@@ -489,14 +420,16 @@ The development of the Amigo Invisible app was supported by a myriad of resource
 
 ### Educational Resources and Support
 
-[Code Institute](https://codeinstitute.net/): For providing a solid foundation in full-stack development and continuous support throughout my learning journey.
-[FreeCodeCamp](https://www.freecodecamp.org/): For a wealth of programming tutorials and exercises that have been instrumental in my coding practice.
-[DEVS](https://devs.com/): For the insightful articles and community discussions that have broadened my understanding of software development.
-[Real Python](https://realpython.com/): For their in-depth Python tutorials and resources which were extremely helpful in refining the app's logic and features.
-[Stack Overflow](https://stackoverflow.com/): For being the go-to platform for resolving coding issues and learning from fellow developers.
+* [Code Institute](https://codeinstitute.net/): For providing a solid foundation in full-stack development and continuous support throughout my learning journey.
+* [FreeCodeCamp](https://www.freecodecamp.org/): For a wealth of programming tutorials and exercises that have been instrumental in my coding practice.
+* [DEVS](https://devs.com/): For the insightful articles and community discussions that have broadened my understanding of software development.
+* [Real Python](https://realpython.com/): For their in-depth Python tutorials and resources which were extremely helpful in refining the app's logic and features.
+* [Stack Overflow](https://stackoverflow.com/): For being the go-to platform for resolving coding issues and learning from fellow developers.
 
 ### Personal Support
 
-My wife and five children: For their unwavering patience, encouragement, and understanding, as I dedicated time and effort to this project.
-The Student Care team at the [Code Institute](https://codeinstitute.net/): For their support and assistance whenever I faced challenges.
-My classmates and the [Slack](https://slack.com/) community: For sharing tips, tricks, and providing a sense of camaraderie.
+* My wife and five children: For their unwavering patience, encouragement, and understanding, as I dedicated time and effort to this project.
+* To my mentor Mo Shame for always providing me useful insights and for supporting the project. 
+* The Student Care team at the [Code Institute](https://codeinstitute.net/): For their support and assistance whenever I faced challenges.
+* My classmates and the [Slack](https://slack.com/) community: For sharing tips, tricks, and providing a sense of camaraderie.
+
